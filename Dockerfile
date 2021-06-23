@@ -7,4 +7,4 @@ RUN yarn
 COPY . ./
 ENV PORT 3000
 EXPOSE $PORT
-CMD ["node", "src/index.js"]
+CMD ["yarn", "start"]
