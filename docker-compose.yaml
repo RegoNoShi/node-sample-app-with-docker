@@ -1,0 +1,21 @@
+version: "3"
+services:
+    node-docker:
+        build:
+            context: .
+        ports:
+            - "3000:3000"
+    
+    mongodb:
+        image: mongo
+        restart: always
+        volumes:
+            - mongodb:/data/db
+            - mongodb-config:/data/configdb
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+
+volumes:
+    mongodb:
+    mongodb-config:

@@ -1,0 +1,11 @@
+version: "3"
+services:
+    node-docker:
+        build:
+            args:
+                NODE_ENV: development
+        volumes:
+            - ./src:/app/src
+        environment: 
+            - NODE_ENV=development
+        command: npm run dev
