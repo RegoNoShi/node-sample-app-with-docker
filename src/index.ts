@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { MONGODB_USER, MONGODB_PWD, MONGODB_IP, MONGODB_PORT } from './config';
+import { MONGODB_USER, MONGODB_PWD, MONGODB_IP, MONGODB_PORT, MONGODB_DB } from './config';
 import { router as postRouter } from './routes/postRoutes';
 
-const mongoURL = `mongodb://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_IP}:${MONGODB_PORT}`;
+const mongoURL = `mongodb://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_IP}:${MONGODB_PORT}/${MONGODB_DB}`;
 const connectWithRetry = () => {
   mongoose
     .connect(mongoURL, {
