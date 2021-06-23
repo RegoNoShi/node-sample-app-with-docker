@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { MONGODB_USER, MONGODB_PWD, MONGODB_IP, MONGODB_PORT } from './config';
+import { router as postRouter } from './routes/postRoutes';
 
 const mongoURL = `mongodb://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_IP}:${MONGODB_PORT}`;
 const connectWithRetry = () => {
@@ -17,13 +18,10 @@ const connectWithRetry = () => {
       setTimeout(connectWithRetry, 5000);
     });
 };
-
 connectWithRetry();
 
-const app = express();
-app.get('/', (req, res) => {
-  res.send('<h2>Hello, world!</h2>');
-});
-
 const port = process.env.PORT || 3000;
+const app = express();
+app.use(express.json());
+app.use('/posts', postRouter);
 app.listen(port, () => console.log(`Listening on port ${port}`));
