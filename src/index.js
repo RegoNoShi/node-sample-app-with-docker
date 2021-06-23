@@ -1,4 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const { MONGODB_USER, MONGODB_PWD, MONGODB_IP, MONGODB_PORT } = require('./config');
+
+
+const mongoURL = `mongodb://${MONGODB_USER}:${MONGODB_PWD}@${MONGODB_IP}:${MONGODB_PORT}`;
+mongoose
+    .connect(mongoURL, {authSource: 'admin', useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('Successfully connected to MongoDB'))
+    .catch((e) => console.log('Unable to connect to MongoDB:', e));
 
 const app = express();
 app.get('/', (req, res) => {
