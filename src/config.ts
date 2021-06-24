@@ -1,3 +1,4 @@
+export const SERVER_PORT = process.env.PORT || 3000;
 export const MONGODB_IP = process.env.MONGODB_IP || 'mongodb';
 export const MONGODB_PORT = process.env.MONGODB_PORT || 27017;
 export const MONGODB_DB = process.env.MONGODB_DB || 'blogdb';

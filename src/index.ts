@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import redis from 'redis';
 import session from 'express-session';
@@ -12,7 +13,8 @@ import {
   REDIS_IP,
   REDIS_PORT,
   SESSION_SECRET,
-  USE_SSL
+  USE_SSL,
+  SERVER_PORT
 } from './config';
 import { router as postRouter } from './routes/postRoutes';
 import { router as authRouter } from './routes/authRoutes';
@@ -35,8 +37,9 @@ const connectWithRetry = () => {
 };
 connectWithRetry();
 
-const port = process.env.PORT || 3000;
 const app = express();
+app.enable('trust proxy');
+app.use(cors());
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient({ host: REDIS_IP, port: REDIS_PORT });
 app.use(
@@ -50,6 +53,10 @@ app.use(
   })
 );
 app.use(express.json());
-app.use('/posts', postRouter);
-app.use('/', authRouter);
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.use('/api/posts', postRouter);
+app.use('/api', authRouter);
+app.use('/api/test', (_, res) => {
+  res.send('The app is alive!');
+  console.log('Test call');
+});
+app.listen(SERVER_PORT, () => console.log(`Listening on port ${SERVER_PORT}`));
