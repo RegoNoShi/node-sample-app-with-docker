@@ -7,6 +7,8 @@ services:
     environment:
       MONGODB_USER: '${MONGODB_USER}'
       MONGODB_PWD: '${MONGODB_PWD}'
+      SESSION_SECRET: '${SESSION_SECRET}'
+      USE_SSL: '${USE_SSL}'
     depends_on:
       - mongodb
 
@@ -19,6 +21,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: '${MONGODB_USER}'
       MONGO_INITDB_ROOT_PASSWORD: '${MONGODB_PWD}'
+
+  redis:
+    image: redis
 
 volumes:
   mongodb:
