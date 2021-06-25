@@ -29,7 +29,10 @@ services:
 
   redis:
     image: redis
+    volumes:
+      - redis:/data
 
 volumes:
   mongodb:
+  redis:
   mongodb-config:

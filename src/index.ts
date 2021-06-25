@@ -55,8 +55,5 @@ app.use(
 app.use(express.json());
 app.use('/api/posts', postRouter);
 app.use('/api', authRouter);
-app.use('/api/test', (_, res) => {
-  res.send('The app is alive!');
-  console.log('Test call');
-});
+app.use('/api/heartbeat', (_, res) => res.send('The app is alive '));
 app.listen(SERVER_PORT, () => console.log(`Listening on port ${SERVER_PORT}`));
