@@ -24,7 +24,7 @@ services:
       SESSION_SECRET: '${SESSION_SECRET}'
       USE_SSL: '${USE_SSL}'
     deploy:
-      replicas: 4
+      replicas: 2
       restart_policy:
         condition: any
       update_config:
